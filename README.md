@@ -1,5 +1,7 @@
 # Audio Image Generation for Denoising
 
+## Please check more details in Supplementary Material_Audio_Image_Generation_for_Denoising.pdf
+
 ## AIGD Model Architecture
 
 - We develop the AIGD model for audio denoising. 
@@ -27,7 +29,7 @@
 
 <div align="center">
     <img src="Figs/bird.png" alt="FID metric of several models">
-    <p>TResults of BirdSoundsDenoising dataset.</p>
+    <p> Results of BirdSoundsDenoising dataset.</p>
 </div>
 
 
@@ -35,5 +37,5 @@
 
 <div align="center">
     <img src="Figs/para.png" alt="FID metric of several models">
-    <p>(a): parameter analysis for $\alpha$. (b): PESQ, SDR, and SSIM change with the increase of training iterations (10,000). The highest values are plotted for each line.</p>
+    <p></p>
 </div>
