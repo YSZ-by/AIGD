@@ -1,106 +1,39 @@
 # Audio Image Generation for Denoising
 
-## WD-Mamba Model Architecture
+## AIGD Model Architecture
 
-- We develop the WD-Mamba model for the synthesis of high-resolution images. 
+- We develop the AIGD model for audio denoising. 
 
 <div align="center">
-    <img src="WD-Mamba.png" alt="Image Generation with WD-Mamba ">
-    <p>The left section of the above figure illustrates the overall generative process. The middle section shows the WD-Mamba encoder-decoder architecture. The bottom left highlights the spiral scan patterns, while the bottom right details the core Mamba block.</p>
+    <img src="Figs/AIGD.png" alt="Image Generation with WD-Mamba ">
+    <p>AIGD model.</p>
 </div>
 
-## Qualitative results of WD-Mamba
+## Algorithm of AIGD
 
 <div align="center">
-    <img src="algo.png" alt=algo">
+    <img src="Figs/alg.png" alt=algo">
     <p>The Training Algorithm.</p>
 </div>
 
-## Qualitative results of WD-Mamba
+## Results of DNS challenge dataset
 
 <div align="center">
-    <img src="celeba_comparison.png" alt="Generated samples on CelebAHQ daatset">
-    <p>The figure above shows the comparison of generated images on the CelebAHQ dataset with different state-of-the-art models.</p>
+    <img src="Figs/DNS.png" alt="Generated samples on CelebAHQ daatset">
+    <p>Results of DNS challenge dataset </p>
 </div>
 
-## Quantitative results of WD-Mamba
+## Results of BirdSoundsDenoising dataset
 
 <div align="center">
-    <img src="re.png" alt="FID metric of several models">
-    <p>The figure above shows the comparison of FID values of generated images on several datasets with different state-of-the-art models.</p>
+    <img src="Figs/bird.png" alt="FID metric of several models">
+    <p>TResults of BirdSoundsDenoising dataset.</p>
 </div>
 
-## More Generated Images by WD-Mamba
+
+## Parameter analysis
 
 <div align="center">
-    <img src="celebahq.png" alt="Generated samples on CelebAHQ daatset">
-    <p>The figure above shows generated images on CelebAHQ dataset.</p>
+    <img src="Figs/para.png" alt="FID metric of several models">
+    <p>(a): parameter analysis for $\alpha$. (b): PESQ, SDR, and SSIM change with the increase of training iterations (10,000). The highest values are plotted for each line.</p>
 </div>
-
-<div align="center">
-    <img src="ffhq.png" alt="Generated samples on FFHQ daatset">
-    <p>The figure above shows generated images on FFHQ dataset.</p>
-</div>
-
-<div align="center">
-    <img src="lsun_beds.png" alt="Generated samples on LSUN Bedrooms daatset">
-    <p>The figure above shows generated images on LSUN Bedrooms dataset.</p>
-</div>
-
-<div align="center">
-    <img src="lsun_churches.png" alt="Generated samples on LSUN Churches daatset">
-    <p>The figure above shows generated images on LSUN Churches dataset.</p>
-</div>
-
-## Training
-
-#### CelebAHQ dataset
-```shell script
-accelerate launch --multi_gpu --gpu_ids 0,1 --main_process_port 20019 --num_processes 2 --mixed_precision bf16 ./train_ldm_uncond.py --config=configs/celeba_wvit.py
-```
-
-#### FFHQ dataset
-```shell script
-accelerate launch --multi_gpu --gpu_ids 0,1 --main_process_port 20019 --num_processes 2 --mixed_precision bf16 ./train_ldm_uncond.py --config=configs/ffhq_wvit.py
-```
-#### LSUN-Bedrooms dataset
-```shell script
-accelerate launch --multi_gpu --gpu_ids 0,1 --main_process_port 20019 --num_processes 2 --mixed_precision bf16 ./train_ldm_uncond.py --config=configs/lsun_beds_wvit.py
-```
-
-#### LSUN-Churches dataset
-```shell script
-accelerate launch --multi_gpu --gpu_ids 0,1 --main_process_port 20019 --num_processes 2 --mixed_precision bf16 ./train_ldm_uncond.py --config=configs/lsun_churches_wvit.py
-```
-
-#### CIFAR10 dataset
-```shell script
-accelerate launch --multi_gpu --gpu_ids 0,1 --main_process_port 20019 --num_processes 2 --mixed_precision bf16 ./train.py --config=configs/cifar10_wvit.py
-```
-
-## Evaluation
-
-#### CelebAHQ dataset
-```shell script
-accelerate launch --multi_gpu --gpu_ids 0,1 --main_process_port 20029 --num_processes 2 --mixed_precision bf16 ./eval_ldm_uncond.py --config=configs/celeba_wvit.py --nnet_path <path for saved checkpoint>
-```
-
-#### FFHQ dataset
-```shell script
-accelerate launch --multi_gpu --gpu_ids 0,1 --main_process_port 20019 --num_processes 2 --mixed_precision bf16 ./eval_ldm_uncond.py --config=configs/ffhq_wvit.py --nnet_path <path for saved checkpoint>
-```
-#### LSUN-Bedrooms dataset
-```shell script
-accelerate launch --multi_gpu --gpu_ids 0,1 --main_process_port 20019 --num_processes 2 --mixed_precision bf16 ./eval_ldm_uncond.py --config=configs/lsun_beds_wvit.py --nnet_path <path for saved checkpoint>
-```
-
-#### LSUN-Churches dataset
-```shell script
-accelerate launch --multi_gpu --gpu_ids 0,1 --main_process_port 20019 --num_processes 2 --mixed_precision bf16 ./eval_ldm_uncond.py --config=configs/lsun_churches_wvit.py --nnet_path <path for saved checkpoint>
-```
-
-#### CIFAR10 dataset
-```shell script
-accelerate launch --multi_gpu --gpu_ids 0,1 --main_process_port 20019 --num_processes 2 --mixed_precision bf16 ./eval.py --config=configs/cifar10_wvit.py --nnet_path <path for saved checkpoint>
-```
-
